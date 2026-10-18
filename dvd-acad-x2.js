@@ -33,7 +33,8 @@
   function mlineEnts(P, closed, S, just){
     const offs = MLS.offs.map(v => v * S), mx = Math.max(...offs), mn = Math.min(...offs);
     const sh = just === 'T' ? -mx : just === 'B' ? -mn : 0; const lines = offs.map(o => offsetOpen(P, o + sh, closed));
-    const out = lines.map(v => ({ type: 'POLYLINE', closed, vertices: v }));
+    const rk = offs.map((o, i) => i).sort((i, j) => offs[i] - offs[j]); const mlk = []; rk.forEach((i, r) => { mlk[i] = r; });   // mlk: thứ tự đường từ phải sang trái (cho MLEDIT)
+    const out = lines.map((v, i) => ({ type: 'POLYLINE', closed, vertices: v, mlk: mlk[i] }));
     if(!closed && MLS.caps && lines.length > 1){ const iT = offs.indexOf(mx), iB = offs.indexOf(mn); for(const k of [0, P.length - 1]) out.push({ type: 'LINE', x1: lines[iT][k].x, y1: lines[iT][k].y, x2: lines[iB][k].x, y2: lines[iB][k].y }); }
     return out;
   }
@@ -151,7 +152,7 @@
   });
   cmd(['REVERSE'], 'Đảo chiều đường / đa tuyến', async () => {
     const s = await A.getSel('Chọn đường, đa tuyến, cung'); const sel = (s.sel || []).filter(e => /^(LINE|POLYLINE|ARC)$/.test(e.type) && !A.isLocked(e)); if(!sel.length) return;
-    A.commit({ rep: sel.map(e => { const w = copy(e); if(w.type === 'LINE'){ [w.x1, w.x2, w.y1, w.y2] = [w.x2, w.x1, w.y2, w.y1]; } else if(w.type === 'POLYLINE') w.vertices.reverse(); return [e, w]; }) }, 'Đã đảo chiều ' + sel.length);
+    A.commit({ rep: sel.map(e => { const w = copy(e); if(w.type === 'LINE'){ [w.x1, w.x2, w.y1, w.y2] = [w.x2, w.x1, w.y2, w.y1]; } else if(w.type === 'POLYLINE'){ if(!A.bvReverse(w, !!w.closed)) w.vertices.reverse(); } return [e, w]; }) }, 'Đã đảo chiều ' + sel.length);
   });
   cmd(['SETBYLAYER', 'SETBYL'], 'Đặt màu, kiểu nét, bề rộng nét về ByLayer', async () => {
     const s = await A.getSel('Chọn đối tượng'); const sel = (s.sel || []).filter(e => !A.isLocked(e)); if(!sel.length) return;
