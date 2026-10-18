@@ -517,7 +517,7 @@
       { id: 'bdyn', en: 'Dynamic Block', vi: 'Khối động', items: [big('BPARAMETER', 'Block\nParameters', 'Tham số\nđộng'), col(sm('BDYN', 'Dynamic State', 'Đổi trạng thái'), sm('REFCLOSE', 'Close Block Editor', 'Đóng sửa khối'))] },
       { id: 'imp', en: 'Import', vi: 'Nhập', items: [big('PDFIMPORT', 'PDF\nImport', 'Nhập\nPDF'), col(sm('ADCENTER', 'DesignCenter', 'Lấy từ bản vẽ khác'), sm('SYMBOL', 'Symbols', 'Ký hiệu kiến trúc'))] },
       { id: 'ref', en: 'Reference', vi: 'Tham chiếu', items: [big('XATTACH', 'Attach', 'Gắn\nXREF'), col(sm('IMAGEATTACH', 'Attach Image', 'Gắn ảnh nền'), sm('IMAGEADJUST', 'Adjust', 'Chỉnh ảnh'), sm('XREF', 'External References', 'Quản lý XREF')), col(sm('XCLIP', 'Clip', 'Cắt hiển thị'), sm('IMAGECLIP', 'Clip Image', 'Cắt ảnh'), sm('HYPERLINK', 'Hyperlink', 'Liên kết'))] },
-      { id: 'data', en: 'Linking & Extraction', vi: 'Dữ liệu', items: [big('ATTEXPORT', 'Extract\nData', 'Trích\ndữ liệu'), big('TABLE', 'Table', 'Bảng'), big('DATALINK', 'Link\nData', 'Liên kết\nExcel'), big('FIELD', 'Field', 'Trường'), col(sm('DATALINKUPDATE', 'Download from Source', 'Cập nhật từ Excel'), sm('TABLEEXPORT', 'Export Table', 'Xuất bảng'), sm('UPDATEFIELD', 'Update Fields', 'Cập nhật trường'))] }
+      { id: 'data', en: 'Linking & Extraction', vi: 'Dữ liệu', items: [big('ATTEXPORT', 'Extract\nData', 'Trích\ndữ liệu'), big('TABLE', 'Table', 'Bảng'), big('DATALINK', 'Link\nData', 'Liên kết\nExcel'), big('FIELD', 'Field', 'Trường'), col(sm('DATALINKURL', 'Link from URL', 'Liên kết Google Sheets'), sm('DATALINKUPDATE', 'Download from Source', 'Cập nhật từ Excel')), col(sm('TABLEEXPORT', 'Export Table', 'Xuất bảng'), sm('UPDATEFIELD', 'Update Fields', 'Cập nhật trường'))] }
     ] },
     annotate: { en: 'Annotate', vi: 'Chú thích', panels: [
       { id: 'text', en: 'Text', vi: 'Chữ', pri: 1, items: [big('MTEXT', 'Multiline\nText', 'Chữ\nnhiều dòng', S({ menu: M_TEXT })), col(sm('FINDREPLACE', 'Find & Replace', 'Tìm & thay'), sm('SPELL', 'Check Spelling', 'Chính tả'), sm('STYLE', 'Text Style', 'Kiểu chữ')), col(sm('TEXTALIGN', 'Text Align', 'Căn thẳng chữ'), sm('FIELD', 'Field', 'Trường'), sm('UPDATEFIELD', 'Update Fields', 'Cập nhật trường'))],
@@ -559,7 +559,7 @@
     ] },
     output: { en: 'Output', vi: 'Xuất', panels: [
       { id: 'plot', en: 'Plot', vi: 'In', items: [big('PLOT', 'Plot', 'In bản vẽ'), big('PUBLISH', 'Batch\nPlot', 'In\nhàng loạt'), col(sm('LAYOUTS', 'Page Setup', 'Layout & khổ giấy'), sm('STYLESMANAGER', 'Plot Style Manager', 'Kiểu in .ctb'), sm('EXPORT', 'Export Image', 'Xuất ảnh / PDF'))] },
-      { id: 'exp', en: 'Export', vi: 'Xuất file', items: [big('EXPORT', 'Export\nPDF', 'Xuất\nPDF'), big('SAVEDWG', 'Save\nDWG', 'Lưu\nDWG'), col(sm('DXFOUT', 'Export DXF', 'Xuất DXF'), sm('SAVEAS', 'Save As DXF', 'Lưu thành DXF'), sm('DWGSERVER', 'DWG Server', 'Máy chủ DWG'))] },
+      { id: 'exp', en: 'Export', vi: 'Xuất file', items: [big('EXPORT', 'Export\nPDF', 'Xuất\nPDF'), big('SAVEDWG', 'Save\nDWG', 'Lưu\nDWG'), col(sm('DXFOUT', 'Export DXF', 'Xuất DXF'), sm('SAVEAS', 'Save As DXF', 'Lưu thành DXF'), sm('DWGSERVER', 'DWG Server', 'Máy chủ DWG')), col(sm('DXFVERSION', 'DXF Version', 'Phiên bản DXF'))] },
       { id: 'exp3', en: '3D Print', vi: 'Xuất 3D', items: [col(sm('EXPORTSTL', 'Export STL', 'Xuất STL'), sm('EXPORTOBJ', 'Export OBJ', 'Xuất OBJ'))] }
     ] },
     collab: { en: 'Collaborate', vi: 'Cộng tác', panels: [
