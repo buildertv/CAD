@@ -213,6 +213,26 @@ Trên mặt bằng, khối hiện dạng hình chiếu. MOVE, COPY, ROTATE, SCAL
 
 **3D:** `SHELL` (làm rỗng khối: bể nước, hộp — hở mặt trên/dưới hoặc kín), `INTERFERE` (kiểm tra va chạm giữa các khối, tạo khối đỏ ở lớp VA_CHAM), `MASSPROP` (thể tích, diện tích mặt, trọng tâm, khối lượng theo vật liệu), `3DARRAY` (hàng × cột × tầng, hoặc tròn).
 
+## Bổ sung (v5h) — XCLIP giống AutoCAD
+- Phần khối nằm ngoài đường cắt chỉ bị **ẩn**, vẫn còn trong bản vẽ. Không bấm chọn, không bắt điểm vào phần ẩn được. Chọn khối thì chọn cả khối: dời, xoay, xoá, phá khối đều tác động lên toàn bộ khối.
+- `XCLIP` có đủ tuỳ chọn như AutoCAD:
+  - **Bật** / **Tắt**: tắt thì hiện đủ khối, bật lại thì cắt như cũ. Khối có đường cắt đang tắt trong file cũng bật lại được.
+  - **Xoá**: bỏ đường cắt.
+  - **Tạo đa tuyến**: vẽ đa tuyến theo đường cắt.
+  - **Khung cắt mới**: Chọn đa tuyến (đa tuyến kín, đường tròn), Đa giác, Chữ nhật, Đảo ngược (giữ phần bên ngoài, ẩn phần bên trong). Có hỏi xoá đường cắt cũ.
+  - Hoàn tác / Làm lại được.
+- Dời, xoay, co giãn, chép khối: đường cắt đi theo khối. Phá khối (`EXPLODE`): hiện đủ, bỏ đường cắt.
+- `XCLIPFRAME`: 0 = ẩn khung đường cắt, 1 = hiện và in, 2 = hiện nhưng không in (mặc định, đọc theo file).
+- Lưu DXF (2000 trở lên): khối được ghi đủ (cả phần bị cắt) kèm đường cắt (SPATIAL_FILTER). Mở bằng AutoCAD vẫn thấy khối bị cắt, XCLIP Tắt trong AutoCAD hiện lại đủ.
+- Ribbon › Chèn › Tham chiếu: XCLIPFRAME.
+
+## Bổ sung (v5g) — XCLIP của file DWG / DXF
+- Khối đã cắt bằng `XCLIP` trong AutoCAD nay hiển thị đúng khi mở file DWG / DXF: phần nằm ngoài đường cắt được ẩn, nét cắt ngang đường cắt chỉ hiện phần bên trong.
+- Hỗ trợ đường cắt chữ nhật và đa giác, khối xoay / co giãn, khối lồng nhau. Khối có đường cắt đang tắt (`XCLIP` › Tắt trong AutoCAD) hiện đầy đủ.
+- Phần bị cắt không bấm chọn được, không tính vào phạm vi bản vẽ (Zoom Extents).
+- Trên layout, khối đã cắt hiển thị đúng trong khung nhìn (cắt theo cả khung nhìn và đường cắt của khối).
+- Bản vẽ nặng mở nhanh hơn vì phần bị cắt không còn phải vẽ.
+
 ## Bổ sung (v5f) — lệnh AutoCAD còn thiếu
 **Khung nhìn trên layout** (bấm vào trong khung nhìn để chọn; khung chồng nhau thì lấy khung nhỏ hơn)
 - `VPLAYER`: đóng băng / làm tan lớp riêng trong từng khung nhìn. Nhập tên lớp (`*`, `?`, dấu phẩy) hoặc Enter rồi chọn đối tượng. Tuỳ chọn Đặt lại (làm tan hết), Liệt kê.
@@ -792,3 +812,4 @@ Trên điện thoại vẫn dùng nút Xuất như cũ.
 - AutoLISP của DVDCAD chạy mã nguồn `.lsp`. Chưa có: hàm `vla-` / `vlax-` (ActiveX), hộp thoại DCL, `grread`, `entmake` cho khối / hatch, reactor. Add-in lưu trên từng máy (trong trình duyệt), không đi kèm bản vẽ hay Google Drive.
 - Độ trong suốt đặt cho từng đối tượng. Độ trong suốt theo lớp (trong bảng Lớp của AutoCAD) chưa đọc / ghi. THICKEN chỉ làm dày được mặt phẳng; mặt cong (REVSURF…) chưa làm dày được. 3DFACE nằm ở cao độ ELEV (chưa nhập Z riêng từng đỉnh).
 - Lớp đóng băng riêng khung nhìn (VPLAYER, LAYVPI) và đường cắt khung nhìn (VPCLIP) lưu trên máy theo bản vẽ, chưa ghi vào file DXF / DWG. VPSYNC trên layout đọc từ file DWG chỉ giữ đến khi mở lại file. ETRANSMIT đóng gói bản vẽ dạng DXF (không phải DWG), không nén. MKLTYPE chỉ tạo kiểu nét đơn giản (nét, khoảng hở, chấm), chưa có chữ / hình trong nét.
+- XCLIP: khối có đường cắt đảo ngược khi lưu DXF được ghi thành các đối tượng rời (phần nhìn thấy), không còn là khối có đường cắt, vì AutoCAD không nhận đường cắt đảo ngược do phần mềm khác tạo. Lưu DXF R12 chỉ ghi phần nhìn thấy. Trên iPhone / iPad (không giữ nhóm khối để tiết kiệm bộ nhớ), phần ngoài đường cắt bị bỏ hẳn khi mở file. Chưa có Clipdepth (cắt theo chiều sâu 3D).
